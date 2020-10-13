@@ -1,6 +1,60 @@
-import merge from "lodash/merge"
-import { createRemoteMediaItemNode } from "~/steps/source-nodes/create-nodes/create-remote-media-item-node"
-import { menuBeforeChangeNode } from "~/steps/source-nodes/before-change-node/menu"
+import merge from "lodash/merge";
+import { createRemoteMediaItemNode } from "~/steps/source-nodes/create-nodes/create-remote-media-item-node";
+import { menuBeforeChangeNode } from "~/steps/source-nodes/before-change-node/menu";
+
+export function makePluginOptionsSchema(Joi) {
+  return Joi.object({
+    url: Joi.string(),
+    verbose: Joi.boolean().default(true),
+    debug: Joi.object({
+      throwRefetchErrors: Joi.boolean().default(false),
+      graphql: Joi.object({
+        showQueryOnError: Joi.boolean().default(false),
+        showQueryVarsOnError: Joi.boolean().default(false),
+        copyQueryOnError: Joi.boolean().default(false),
+        panicOnError: Joi.boolean().default(false),
+        onlyReportCriticalErrors: Joi.boolean().default(false),
+        copyNodeSourcingQueryAndExit: Joi.boolean().default(false),
+        writeQueriesToDisk: Joi.boolean().default(false),
+      }),
+      timeBuildSteps: Joi.boolean().default(false),
+      disableCompatibilityCheck: Joi.boolean().default(false),
+    }),
+    develop: Joi.object({
+      nodeUpdateInterval: Joi.number().integer().default(300),
+      hardCacheMediaFiles: Joi.boolean().default(false),
+      hardCacheData: Joi.boolean().default(false),
+    }),
+    auth: Joi.object({
+      htaccess: Joi.object({
+        username: Joi.string(),
+        password: Joi.string(),
+      }),
+    }),
+    schema: Joi.object({
+      typePrefix: Joi.string().default(`Wp`),
+      timeout: Joi.number()
+        .integer()
+        .default(30 * 1000),
+      perPage: Joi.number().integer().default(100),
+      queryDepth: Joi.number().integer().default(15),
+      circularQueryLimit: Joi.number().integer().default(5),
+    }),
+    excludeFieldNames: Joi.array().items(Joi.string()),
+    html: Joi.object({
+      useGatsbyImage: Joi.boolean().default(true),
+      imageMaxWidth: Joi.number().integer(),
+      fallbackImageMaxWidth: Joi.number().integer().default(100),
+      imageQuality: Joi.number().integer().default(90),
+      createStaticFiles: Joi.boolean().default(true),
+    }),
+    /*
+    type: Joi.object({
+
+    })
+    */
+  });
+}
 
 const defaultPluginOptions = {
   url: null,
@@ -99,7 +153,7 @@ const defaultPluginOptions = {
         if (typeSettings.lazyNodes) {
           return {
             remoteNode,
-          }
+          };
         }
 
         if (
@@ -110,22 +164,22 @@ const defaultPluginOptions = {
           const createdMediaItem = await createRemoteMediaItemNode({
             mediaItemNode: remoteNode,
             parentName: `Node action ${actionType}`,
-          })
+          });
 
           if (createdMediaItem) {
             remoteNode.localFile = {
               id: createdMediaItem.id,
-            }
+            };
 
             return {
               remoteNode,
-            }
+            };
           }
         }
 
         return {
           remoteNode,
-        }
+        };
       },
     },
     ContentNode: {
@@ -213,7 +267,7 @@ const defaultPluginOptions = {
       exclude: true,
     },
   },
-}
+};
 
 const gatsbyApi = {
   state: {
@@ -223,9 +277,9 @@ const gatsbyApi = {
 
   reducers: {
     setState(state, payload) {
-      return merge(state, payload)
+      return merge(state, payload);
     },
   },
-}
+};
 
-export default gatsbyApi
+export default gatsbyApi;

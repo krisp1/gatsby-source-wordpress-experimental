@@ -4,11 +4,17 @@
   - [url: String](#url-string)
   - [verbose: Boolean](#verbose-boolean)
   - [debug: Object](#debug-object)
+    - [debug.throwRefetchErrors: Boolean](#throwrefetcherrors-boolean)
     - [debug.graphql: Object](#debuggraphql-object)
+      - [debug.graphql.showQueryOnError: Boolean](#debuggraphqlshowqueryonerror-boolean)
       - [debug.graphql.showQueryVarsOnError: Boolean](#debuggraphqlshowqueryvarsonerror-boolean)
+      - [debug.graphql.copyQueryOnError: Boolean](#debuggraphqlcopyqueryonerror-boolean)
       - [debug.graphql.panicOnError: Boolean](#debuggraphqlpaniconerror-boolean)
       - [debug.graphql.onlyReportCriticalErrors: Boolean](#debuggraphqlonlyreportcriticalerrors-boolean)
+      - [debug.graphql.copyNodeSourcingQueryAndExit: Boolean](#debuggraphqlcopynodesourcingqueryandexit-boolean)
       - [debug.graphql.writeQueriesToDisk: Boolean](#debuggraphqlwritequeriestodisk-boolean)
+    - [debug.timeBuildSteps: Boolean](#debugtimeBuildSteps-boolean)
+    - [debug.disableCompatibilityCheck: Boolean](#debugdisablecompatibilitycheck-boolean)
   - [develop: Object](#develop-object)
     - [develop.nodeUpdateInterval: Int](#developnodeupdateinterval-int)
     - [develop.hardCacheMediaFiles: Boolean](#develophardcachemediafiles-boolean)
@@ -21,6 +27,8 @@
     - [schema.typePrefix: String](#schematypeprefix-string)
     - [schema.timeout: Int](#schematimeout-int)
     - [schema.perPage: Int](#schemaperpage-int)
+    - [schema.queryDepth: Int](#schemaquerydepth-int)
+    - [schema.circularQueryLimit: Int](#schemacircularquerylimit-int)
   - [excludeFieldNames: Array](#excludefieldnames-array)
   - [html: Object](#html-object)
     - [html.useGatsbyImage: Boolean](#htmlusegatsbyimage-boolean)
@@ -80,6 +88,10 @@ An object which contains options related to debugging. See below for options.
 },
 ```
 
+### debug.throwRefetchErrors: Boolean
+
+_TODO_
+
 ### debug.graphql: Object
 
 An object which contains GraphQL debugging options. See below for options.
@@ -97,6 +109,10 @@ An object which contains GraphQL debugging options. See below for options.
 },
 ```
 
+### debug.graphql.showQueryOnError: Boolean
+
+_TODO_
+
 #### debug.graphql.showQueryVarsOnError: Boolean
 
 When a GraphQL error is returned and the process exits, this plugin option determines wether or not to log out the query vars that were used in the query that returned GraphQL errors. Default is false.
@@ -113,6 +129,10 @@ When a GraphQL error is returned and the process exits, this plugin option deter
   },
 },
 ```
+
+### debug.graphql.copyQueryOnError: Boolean
+
+_TODO_
 
 #### debug.graphql.panicOnError: Boolean
 
@@ -150,6 +170,10 @@ Determines wether or not to log non-critical errors. A non-critical error is any
 },
 ```
 
+#### debug.graphql.copyNodeSourcingQueryAndExit: Boolean
+
+_TODO_
+
 #### debug.graphql.writeQueriesToDisk: Boolean
 
 When true, all internal GraphQL queries generated during node sourcing will be written out to `./WordPress/GraphQL/[TypeName]/*.graphql` for every type that is sourced. This is very useful for debugging GraphQL errors. Default is false.
@@ -166,6 +190,14 @@ When true, all internal GraphQL queries generated during node sourcing will be w
   },
 },
 ```
+
+## debug.timeBuildSteps
+
+_TODO_
+
+## debug.disableCompatibilityCheck
+
+_TODO_
 
 ## develop: Object
 
@@ -371,6 +403,14 @@ Default is `100`.
   },
 },
 ```
+
+### schema.queryDepth: Int
+
+_TODO_
+
+### schema.circularQueryLimit: Int
+
+_TODO_
 
 ## excludeFieldNames: Array
 
